@@ -7,7 +7,7 @@ let package = Package(
     name: "swiftyvulkan",
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/IBM-Swift/HeliumLogger.git", from: "1.7.0")
+        //.package(url: "https://github.com/IBM-Swift/HeliumLogger.git", from: "1.7.0")
     ],
    targets: [
         // Targets are the basic building blocks of a package. Aswiftget can define a module or a test suite.
@@ -16,7 +16,7 @@ let package = Package(
         .systemLibrary(name: "CGLFW", pkgConfig: "glfw3"),
 		.target(
             name: "swiftyvulkan",
-            dependencies: ["CVulkan","CGLFW" ,"HeliumLogger"]),
+            dependencies: ["CVulkan","CGLFW" /*,"HeliumLogger"]*/),
         .testTarget(
             name: "swiftyvulkanTests",
             dependencies: ["swiftyvulkan"]),
