@@ -9,8 +9,8 @@ Swift is installed from the official website. This project currently depends on 
 ```bash
 sudo apt-get install clang libicu-dev libcurl4
 wget https://swift.org/builds/swift-4.2.2-release/ubuntu1804/swift-4.2.2-RELEASE/swift-4.2.2-RELEASE-ubuntu18.04.tar.gz
-tar xvpf swift-4.2-RELEASE-ubuntu18.04.tar.gz
-export PATH=~/swift-4.2-RELEASE-ubuntu18.04/usr/bin:$PATH
+tar xvpf swift-4.2.2-RELEASE-ubuntu18.04.tar.gz
+export PATH=~/swift-4.2.2-RELEASE-ubuntu18.04/usr/bin:$PATH
 ```
 
 Vulkan was installed trhough `apt-get`
