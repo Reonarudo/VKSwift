@@ -1,0 +1,4 @@
+module CVulkan [system] {
+	umbrella header "vkheader.h"
+	link "vulkan"
+}
