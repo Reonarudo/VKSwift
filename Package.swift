@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "swiftyvulkan",
+    name: "VKSwift",
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         //.package(url: "https://github.com/IBM-Swift/HeliumLogger.git", from: "1.7.0")
@@ -15,10 +15,10 @@ let package = Package(
         .systemLibrary(name: "CVulkan", pkgConfig: "vulkan"),
         .systemLibrary(name: "CGLFW", pkgConfig: "glfw3"),
 		.target(
-            name: "swiftyvulkan",
+            name: "VKSwift",
             dependencies: ["CVulkan","CGLFW" /*,"HeliumLogger"]*/),
         .testTarget(
-            name: "swiftyvulkanTests",
-            dependencies: ["swiftyvulkan"]),
+            name: "VKSwiftTests",
+            dependencies: ["VKSwift"]),
     ]
 )
