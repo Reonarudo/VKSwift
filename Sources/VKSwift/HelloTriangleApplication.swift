@@ -35,6 +35,14 @@ class HelloTriangleApplication {
     }
 
     fileprivate func initVulkan() throws{
+        var appInfo = VkApplicationInfo()
+        appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
+        appInfo.pApplicationName = UnsafePointer(strdup("Hello Triangle")!)
+        appInfo.applicationVersion = UInt32(1)
+        appInfo.pEngineName = UnsafePointer(strdup("No Engine")!)
+        appInfo.engineVersion = UInt32(1)
+        appInfo.apiVersion = UInt32(VK_VERSION_1_0);
+
         var instance: VkInstance?
         var createInfo = VkInstanceCreateInfo()
         createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO
