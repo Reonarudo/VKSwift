@@ -1,0 +1,17 @@
+os:
+  - linux
+language: generic
+sudo: required
+dist: trusty
+before_install:
+  - sudo apt-get install -y clang libicu-dev libcurl4 libglm-dev cmake libxcb-dri3-0 libxcb-present0 libpciaccess0 libpng-dev libxcb-keysyms1-dev libxcb-dri3-dev libx11-dev libmirclient-dev libwayland-dev libxrandr-dev libxcb-ewmh-dev libglfw3-dev libglfw3-wayland
+  - wget -qO - http://packages.lunarg.com/lunarg-signing-key-pub.asc | sudo apt-key add -
+  - sudo wget -qO /etc/apt/sources.list.d/lunarg-vulkan-1.1.97-bionic.list http://packages.lunarg.com/vulkan/1.1.97/lunarg-vulkan-1.1.97-bionic.list
+  - sudo apt update
+  - sudo apt install lunarg-vulkan-sdk
+install:
+  - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+script:
+  - swift build
+env:
+  - SWIFT_VERSION=4.1
