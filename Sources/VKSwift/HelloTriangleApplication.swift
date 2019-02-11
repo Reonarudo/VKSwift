@@ -6,6 +6,7 @@ class HelloTriangleApplication {
     let WIDTH: Int32  = 800
     let HEIGHT: Int32 = 600
     var window: OpaquePointer? = nil
+    var instance: VkInstance?
 
     func run() throws{
         initWindow()
@@ -43,9 +44,12 @@ class HelloTriangleApplication {
         appInfo.engineVersion = UInt32(1)
         appInfo.apiVersion = UInt32(VK_VERSION_1_0);
 
-        var instance: VkInstance?
+        
+
         var createInfo = VkInstanceCreateInfo()
         createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO
+        //createInfo.pApplicationInfo = UnsafePointer<VkApplicationInfo>(&appInfo)
+        
         let result: VkResult? = vkCreateInstance(&createInfo, nil, &instance)
         guard let res = result else{
             throw GeneralError.message("unknown error")
@@ -56,7 +60,7 @@ class HelloTriangleApplication {
 
 
 
-        vkDestroyInstance(instance, nil)
+        
     }
 
 
@@ -74,8 +78,8 @@ class HelloTriangleApplication {
     }
 
     fileprivate func cleanup() {
+        vkDestroyInstance(instance, nil)
         glfwDestroyWindow(window);
-
         glfwTerminate();
     }
 };
