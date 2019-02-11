@@ -7,6 +7,7 @@ class HelloTriangleApplication {
     let HEIGHT: Int32 = 600
     var window: OpaquePointer? = nil
     var instance: VkInstance?
+    var physicalDevice: VkPhysicalDevice? = nil
 
     func run() throws{
         initWindow()
@@ -36,32 +37,68 @@ class HelloTriangleApplication {
     }
 
     fileprivate func initVulkan() throws{
-        var appInfo = VkApplicationInfo()
-        appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-        appInfo.pApplicationName = UnsafePointer(strdup("Hello Triangle")!)
-        appInfo.applicationVersion = UInt32(1)
-        appInfo.pEngineName = UnsafePointer(strdup("No Engine")!)
-        appInfo.engineVersion = UInt32(1)
-        appInfo.apiVersion = UInt32(VK_VERSION_1_0);
+        createInstance()
+        // pickPhysicalDevice()
+    }
 
-        
+    fileprivate func createInstance() throws{
+        var appInfo = VkApplicationInfo(
+            sType: VK_STRUCTURE_TYPE_APPLICATION_INFO,
+            pNext: nil,
+            pApplicationName: "Hello Triangle",
+            applicationVersion: 1,
+            pEngineName: "No Engine",
+            engineVersion: 0,
+            apiVersion: UInt32(VK_VERSION_1_0)
+        )
+        print("\(type(of:appInfo))")
 
-        var createInfo = VkInstanceCreateInfo()
-        createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO
-        //createInfo.pApplicationInfo = UnsafePointer<VkApplicationInfo>(&appInfo)
+        var glfwExtensionCount:UInt32 = 0
+        let glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount)
+
+        var createInfo = VkInstanceCreateInfo(
+            sType: VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, 
+            pNext: nil, 
+            flags: 0,
+            pApplicationInfo: &appInfo, 
+            enabledLayerCount: 0,
+            ppEnabledLayerNames: nil,
+            enabledExtensionCount: glfwExtensionCount,
+            ppEnabledExtensionNames: glfwExtensions
+            )
+
         
         let result: VkResult? = vkCreateInstance(&createInfo, nil, &instance)
-        guard let res = result else{
+        guard result != VK_SUCCESS else{
             throw GeneralError.message("unknown error")
         }
-        if res == VkResult(-9) {
+        if result == VK_ERROR_INCOMPATIBLE_DRIVER {
             print("Cannot find a compatible Vulkan ICD")
         }
-
-
-
-        
     }
+
+    // fileprivate func pickPhysicalDevice() throws{
+    //     var deviceCount: UInt32 = 0
+    //     vkEnumeratePhysicalDevices(instance, &deviceCount, nil)
+
+    //     if (deviceCount == 0) {
+    //         throw GeneralError.message("failed to find GPUs with Vulkan support!")
+    //     }
+
+    //     var devices:[VkPhysicalDevice]=[]
+    //     vkEnumeratePhysicalDevices(instance, &deviceCount, devices.enumerated())
+
+    //     devices.forEach{
+    //         if (isDeviceSuitable($0)) {
+    //             physicalDevice = $0
+    //             break
+    //         }
+    //     }
+
+    //     if (physicalDevice == VK_NULL_HANDLE) {
+    //         throw std::runtime_error("failed to find a suitable GPU!")
+    //     }
+    // }
 
 
     fileprivate func mainLoop() {
