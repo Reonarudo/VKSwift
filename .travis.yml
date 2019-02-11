@@ -8,7 +8,7 @@ before_install:
   - git clone https://github.com/glfw/glfw && mkdir build && cd build && cmake ../glfw && make -j4 && sudo make install
 before_script:
   - curl https://packages.lunarg.com/lunarg-signing-key-pub.asc | sudo apt-key add -
-  - sudo curl -sS https://packages.lunarg.com/vulkan/1.1.97/lunarg-vulkan-1.1.97-bionic.list >> /etc/apt/sources.list.d/lunarg-vulkan-1.1.97-bionic.list
+  - sudo bash -c "curl -sS https://packages.lunarg.com/vulkan/1.1.97/lunarg-vulkan-1.1.97-bionic.list >> /etc/apt/sources.list.d/lunarg-vulkan-1.1.97-bionic.list"
   - sudo apt-get update -q
   - sudo apt-get install -y lunarg-vulkan-sdk
 install:
