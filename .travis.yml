@@ -11,7 +11,7 @@ before_script:
   - curl https://packages.lunarg.com/lunarg-signing-key-pub.asc | sudo apt-key add -
   - sudo bash -c "curl -sS https://packages.lunarg.com/vulkan/1.1.97/lunarg-vulkan-1.1.97-xenial.list >> /etc/apt/sources.list.d/lunarg-vulkan-1.1.97-xenial.list"
   - sudo apt-get update -q
-  - sudo apt-get install -y lunarg-vulkan-sdk libglfw-dev
+  - sudo apt-get install -y lunarg-vulkan-sdk libglfw3-dev
 install:
   - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
 script:
