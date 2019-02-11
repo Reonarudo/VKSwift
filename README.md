@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Reonarudo/VKSwift.svg?branch=master)](https://travis-ci.org/Reonarudo/VKSwift)
 # VKSwift
 
 This is a project template for Linux Swift apps running the Vulkan SDK.
