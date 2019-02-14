@@ -1,4 +1,4 @@
 module CVulkan [system] {
-	umbrella header "vkheader.h"
+	umbrella header "shim.h"
 	link "vulkan"
 }
